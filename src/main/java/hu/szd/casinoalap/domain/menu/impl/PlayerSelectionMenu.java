@@ -1,21 +1,18 @@
-package hu.szd.casinoalap.domain.menu.imp;
+package hu.szd.casinoalap.domain.menu.impl;
 
-import hu.szd.casinoalap.controller.imp.PlayerControllerImp;
+import hu.szd.casinoalap.controller.RepositoryController;
 import hu.szd.casinoalap.domain.menu.Menu;
 import hu.szd.casinoalap.domain.player.Player;
-import hu.szd.casinoalap.repository.PlayerRepository;
 
 import java.util.Scanner;
 
 public class PlayerSelectionMenu implements Menu {
 
-    private final PlayerControllerImp playerController;
-    private final PlayerRepository playerRepository;
+    private final RepositoryController repositoryController;
     private final Scanner scanner = new Scanner(System.in);
 
-    public PlayerSelectionMenu(PlayerControllerImp playerController, PlayerRepository playerRepository) {
-        this.playerController = playerController;
-        this.playerRepository = playerRepository;
+    public PlayerSelectionMenu(RepositoryController repositoryController) {
+        this.repositoryController = repositoryController;
     }
 
     @Override
@@ -24,10 +21,10 @@ public class PlayerSelectionMenu implements Menu {
 
         while (running) {
             System.out.println("\n--- Játékos választó menü ---");
-            playerController.listPlayers();
+            repositoryController.listPlayers();
             System.out.println("\n1. Létező játékos kiválasztása");
             System.out.println("2. Új játékos létrehozása");
-            System.out.println("3. Kilépés");
+            System.out.println("0. Kilépés");
             System.out.print("Válassz egy opciót: ");
 
             int option = scanner.nextInt();
@@ -37,16 +34,23 @@ public class PlayerSelectionMenu implements Menu {
                 case 1 -> {
                     System.out.print("Add meg a játékos ID-ját: ");
                     int id = scanner.nextInt();
-                    scanner.nextLine();
                     try {
-                        Player selectedPlayer = playerRepository.findPlayerById(id);
-                        new PlayerActionMenu(playerController, playerRepository, selectedPlayer).showMenu();
+                        Player selectedPlayer = repositoryController.findPlayerById(id);
+                        new PlayerActionMenu(selectedPlayer, repositoryController).showMenu();
                     } catch (IllegalArgumentException e) {
                         System.out.println("Hiba: " + e.getMessage());
                     }
                 }
-                case 2 -> System.out.println("HozzáadásTeszt");//playerController.addPlayer();
-                case 3 -> {
+                case 2 -> {
+                    System.out.println("Add meg az új játékos nevét: ");
+                    String newPlayerName = scanner.nextLine();
+                    Player newPlayer = new Player (repositoryController.newId(), newPlayerName, 0, 0);
+                    repositoryController.addPlayer(newPlayer);
+                }
+
+
+
+                case 0 -> {
                     System.out.println("Kilépés...");
                     running = false;
                 }

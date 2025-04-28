@@ -1,7 +1,7 @@
-package hu.szd.casinoalap.domain.games.imp;
+package hu.szd.casinoalap.domain.games.impl;
 
 import hu.szd.casinoalap.domain.games.Game;
-import hu.szd.casinoalap.domain.games.betvalidator.BetValidator;
+import hu.szd.casinoalap.domain.service.BetValidator;
 import hu.szd.casinoalap.domain.player.Player;
 
 import java.util.Random;
@@ -12,8 +12,8 @@ public class DoubleOrNothingGame implements Game {
     private final Random random = new Random();
     private final Scanner scanner = new Scanner(System.in);
     private final int minimumBet = 10;
-    private Player player;
-    private BetValidator betValidator = new BetValidator();
+    private final Player player;
+    private final BetValidator betValidator = new BetValidator();
 
     public DoubleOrNothingGame(Player player) {
         this.player = player;
@@ -33,7 +33,6 @@ public class DoubleOrNothingGame implements Game {
 
         boolean win = random.nextBoolean();
         if (win) {
-            bet = bet*2;
             System.out.println("Gratulálok! Dupláztad a téted!");
         } else {
             bet = bet*(-1);

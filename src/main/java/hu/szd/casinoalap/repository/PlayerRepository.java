@@ -15,4 +15,6 @@ public interface PlayerRepository {
     Player findPlayerById(int id);
 
     void deletePlayer(int id);
+
+    int nextId();
 }

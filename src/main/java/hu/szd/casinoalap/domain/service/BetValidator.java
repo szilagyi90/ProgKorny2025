@@ -1,4 +1,4 @@
-package hu.szd.casinoalap.domain.games.betvalidator;
+package hu.szd.casinoalap.domain.service;
 
 import hu.szd.casinoalap.domain.player.Player;
 

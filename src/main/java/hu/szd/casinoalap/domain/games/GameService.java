@@ -1,6 +1,6 @@
 package hu.szd.casinoalap.domain.games;
 
-import hu.szd.casinoalap.domain.games.imp.DoubleOrNothingGame;
+import hu.szd.casinoalap.domain.games.impl.DoubleOrNothingGame;
 import hu.szd.casinoalap.domain.player.Player;
 
 import java.util.HashMap;

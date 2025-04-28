@@ -1,12 +1,13 @@
-package hu.szd.casinoalap.repository.imp;
+package hu.szd.casinoalap.repository.impl;
 
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class PlayerRepositoryImp implements PlayerRepository {
+public class PlayerRepositoryImpl implements PlayerRepository {
 
     private List<Player> PLAYERS = new ArrayList<>(List.of(
             new Player(1, "Dávid", 1000, 1000)
@@ -43,19 +44,24 @@ public class PlayerRepositoryImp implements PlayerRepository {
 
     @Override
     public void deletePlayer(int id) {
-        for (Player player : PLAYERS) {
-            if (player.getId() == id) {
-                PLAYERS.remove(player);
-                System.out.println("A " + id +" ID-jú játékos törölve");
-                break;
-            }
+        try {
+            Player player = findPlayerById(id);
+            PLAYERS.remove(player);
+            System.out.println("A " + id + " ID-jú játékos törölve.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public String toString() {
-        return "PlayerRepositoryImp{" +
-                "PLAYERS=" + PLAYERS +
-                '}';
+    public int nextId() {
+        int newId = PLAYERS.size() + 1;
+        for (Player player : PLAYERS){
+            if (newId == player.getId()){
+                newId++;
+            }
+        }
+        return newId;
     }
-}
+    }
+

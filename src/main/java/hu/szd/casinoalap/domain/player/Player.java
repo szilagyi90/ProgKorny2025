@@ -34,18 +34,14 @@ public class Player {
         return totalGeneratedChips;
     }
 
-    public void setTotalGeneratedChips(int totalGeneratedChips) {
-        this.totalGeneratedChips = totalGeneratedChips;
-    }
+    public void setTotalGeneratedChips(int totalGeneratedChips) { this.totalGeneratedChips = totalGeneratedChips; }
 
 
     @Override
     public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", jelenlegi zseton mennyiség=" + currentChips +
-                ", összesen vásárolt zseton=" + totalGeneratedChips +
-                '}';
+        return  "id= " + id +
+                ", username= " + username +
+                ", jelenlegi zseton mennyiség= " + currentChips +
+                ", összesen vásárolt zseton= " + totalGeneratedChips;
     }
 }

@@ -1,16 +1,17 @@
 package hu.szd.casinoalap.controller.imp;
 
-import hu.szd.casinoalap.controller.PlayerController;
+import hu.szd.casinoalap.controller.RepositoryController;
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
+import hu.szd.casinoalap.repository.impl.PlayerRepositoryImpl;
 
 import java.util.List;
 
-public class PlayerControllerImp implements PlayerController {
+public class RepositoryControllerImpl implements RepositoryController {
 
     private final PlayerRepository playerRepository;
 
-    public PlayerControllerImp(PlayerRepository playerRepository) {
+    public RepositoryControllerImpl(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
 
@@ -18,7 +19,6 @@ public class PlayerControllerImp implements PlayerController {
     @Override
     public void addPlayer(Player player) {
         playerRepository.addPlayer(player);
-
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PlayerControllerImp implements PlayerController {
             System.out.println("Nincsenek játékosok.");
         } else {
             for (Player player : players) {
-                System.out.println(player); // automatikusan a toString() hívódik meg
+                System.out.println(player);
             }
         }
     }
@@ -42,4 +42,12 @@ public class PlayerControllerImp implements PlayerController {
     public void updatePlayer(Player player) {
         playerRepository.updatePlayer(player);
     }
+
+    @Override
+    public int newId() { return playerRepository.nextId(); }
+
+    @Override
+    public void deletePlayerById(int id) { playerRepository.deletePlayer(id); }
+
+
 }
