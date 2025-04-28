@@ -43,11 +43,10 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     }
 
     @Override
-    public void deletePlayer(int id) {
+    public void deletePlayer(Player player) {
         try {
-            Player player = findPlayerById(id);
             PLAYERS.remove(player);
-            System.out.println("A " + id + " ID-jú játékos törölve.");
+            System.out.println("A játékos törölve.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

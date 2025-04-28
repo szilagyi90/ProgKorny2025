@@ -47,7 +47,7 @@ public class PlayerActionMenu implements Menu {
                 }
 
                 case 3 -> {
-                    repositoryController.deletePlayerById(selectedPlayer.getId());
+                    repositoryController.deletePlayer(selectedPlayer);
                     running = false;
                 }
                 case 0 -> running = false;

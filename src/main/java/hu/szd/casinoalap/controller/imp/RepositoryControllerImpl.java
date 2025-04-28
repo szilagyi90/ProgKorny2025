@@ -47,7 +47,7 @@ public class RepositoryControllerImpl implements RepositoryController {
     public int newId() { return playerRepository.nextId(); }
 
     @Override
-    public void deletePlayerById(int id) { playerRepository.deletePlayer(id); }
+    public void deletePlayer(Player player) { playerRepository.deletePlayer(player); }
 
 
 }

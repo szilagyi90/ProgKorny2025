@@ -9,5 +9,5 @@ public interface RepositoryController {
     Player findPlayerById(int id);
     void updatePlayer(Player player);
     int newId();
-    void deletePlayerById(int id);
+    void deletePlayer(Player player);
 }
