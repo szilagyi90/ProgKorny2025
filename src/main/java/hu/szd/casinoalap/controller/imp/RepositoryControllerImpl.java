@@ -9,12 +9,7 @@ import java.util.List;
 
 public class RepositoryControllerImpl implements RepositoryController {
 
-    private final PlayerRepository playerRepository;
-
-    public RepositoryControllerImpl(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-    }
-
+    private final PlayerRepository playerRepository = new PlayerRepositoryImpl();
 
     @Override
     public void addPlayer(Player player) {
