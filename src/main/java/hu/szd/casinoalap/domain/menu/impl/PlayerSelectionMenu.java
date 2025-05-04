@@ -1,6 +1,7 @@
 package hu.szd.casinoalap.domain.menu.impl;
 
 import hu.szd.casinoalap.controller.RepositoryController;
+import hu.szd.casinoalap.controller.imp.RepositoryControllerImpl;
 import hu.szd.casinoalap.domain.menu.Menu;
 import hu.szd.casinoalap.domain.player.Player;
 
@@ -8,12 +9,9 @@ import java.util.Scanner;
 
 public class PlayerSelectionMenu implements Menu {
 
-    private final RepositoryController repositoryController;
+    private final RepositoryController repositoryController = new RepositoryControllerImpl();
     private final Scanner scanner = new Scanner(System.in);
 
-    public PlayerSelectionMenu(RepositoryController repositoryController) {
-        this.repositoryController = repositoryController;
-    }
 
     @Override
     public void showMenu() {
