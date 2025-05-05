@@ -11,12 +11,17 @@ public class DoubleOrNothingGame implements Game {
 
     private final Random random = new Random();
     private final Scanner scanner = new Scanner(System.in);
-    private final int minimumBet = 10;
     private final Player player;
     private final BetValidator betValidator = new BetValidator();
 
+
     public DoubleOrNothingGame(Player player) {
         this.player = player;
+    }
+
+    @Override
+    public int minimumBet() {
+        return 10;
     }
 
     @Override
@@ -26,7 +31,7 @@ public class DoubleOrNothingGame implements Game {
         int bet = scanner.nextInt();
         scanner.nextLine();
 
-        if (!betValidator.isValidBet(player, bet, minimumBet)) {
+        if (!betValidator.isValidBet(player, bet, minimumBet())) {
             System.out.println("Érvénytelen tét!");
             return;
         }
@@ -40,6 +45,8 @@ public class DoubleOrNothingGame implements Game {
         }
     player.setCurrentChips(player.getCurrentChips()+bet);
     }
+
+
 
 }
 

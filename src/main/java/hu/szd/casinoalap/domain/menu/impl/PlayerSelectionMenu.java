@@ -1,17 +1,25 @@
 package hu.szd.casinoalap.domain.menu.impl;
 
-import hu.szd.casinoalap.controller.RepositoryController;
-import hu.szd.casinoalap.controller.imp.RepositoryControllerImpl;
+import hu.szd.casinoalap.domain.player.repositoryService.PlayerRepositoryService;
 import hu.szd.casinoalap.domain.menu.Menu;
 import hu.szd.casinoalap.domain.player.Player;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-
+@Component
 public class PlayerSelectionMenu implements Menu {
 
-    private final RepositoryController repositoryController = new RepositoryControllerImpl();
+    private final PlayerRepositoryService playerRepositoryService;
+    private final PlayerActionMenu playerActionMenu;
     private final Scanner scanner = new Scanner(System.in);
 
+    @Autowired
+    public PlayerSelectionMenu(PlayerRepositoryService playerRepositoryService, @Qualifier("playerActionMenu") PlayerActionMenu playerActionMenu) {
+        this.playerRepositoryService = playerRepositoryService;
+        this.playerActionMenu = playerActionMenu;
+    }
 
     @Override
     public void showMenu() {
@@ -19,7 +27,7 @@ public class PlayerSelectionMenu implements Menu {
 
         while (running) {
             System.out.println("\n--- Játékos választó menü ---");
-            repositoryController.listPlayers();
+            playerRepositoryService.listPlayers();
             System.out.println("\n1. Létező játékos kiválasztása");
             System.out.println("2. Új játékos létrehozása");
             System.out.println("0. Kilépés");
@@ -33,8 +41,9 @@ public class PlayerSelectionMenu implements Menu {
                     System.out.print("Add meg a játékos ID-ját: ");
                     int id = scanner.nextInt();
                     try {
-                        Player selectedPlayer = repositoryController.findPlayerById(id);
-                        new PlayerActionMenu(selectedPlayer, repositoryController).showMenu();
+                        Player selectedPlayer = playerRepositoryService.findPlayerById(id);
+                        playerActionMenu.setPlayer(selectedPlayer);
+                        playerActionMenu.showMenu();
                     } catch (IllegalArgumentException e) {
                         System.out.println("Hiba: " + e.getMessage());
                     }
@@ -42,8 +51,8 @@ public class PlayerSelectionMenu implements Menu {
                 case 2 -> {
                     System.out.println("Add meg az új játékos nevét: ");
                     String newPlayerName = scanner.nextLine();
-                    Player newPlayer = new Player (repositoryController.newId(), newPlayerName, 0, 0);
-                    repositoryController.addPlayer(newPlayer);
+                    Player newPlayer = new Player(playerRepositoryService.newId(), newPlayerName, 0, 0);
+                    playerRepositoryService.addPlayer(newPlayer);
                 }
 
 

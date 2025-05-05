@@ -1,8 +1,8 @@
-package hu.szd.casinoalap.controller;
+package hu.szd.casinoalap.domain.player.repositoryService;
 
 import hu.szd.casinoalap.domain.player.Player;
 
-public interface RepositoryController {
+public interface PlayerRepositoryService {
 
     void addPlayer(Player player);
     void listPlayers();

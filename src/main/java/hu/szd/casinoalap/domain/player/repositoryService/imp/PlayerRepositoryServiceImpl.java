@@ -1,15 +1,19 @@
-package hu.szd.casinoalap.controller.imp;
+package hu.szd.casinoalap.domain.player.repositoryService.imp;
 
-import hu.szd.casinoalap.controller.RepositoryController;
+import hu.szd.casinoalap.domain.player.repositoryService.PlayerRepositoryService;
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
-import hu.szd.casinoalap.repository.impl.PlayerRepositoryImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public class PlayerRepositoryServiceImpl implements PlayerRepositoryService {
 
-public class RepositoryControllerImpl implements RepositoryController {
+    private final PlayerRepository playerRepository;
 
-    private final PlayerRepository playerRepository = new PlayerRepositoryImpl();
+    public PlayerRepositoryServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     @Override
     public void addPlayer(Player player) {

@@ -1,6 +1,8 @@
 package hu.szd.casinoalap.domain.service;
 
 import hu.szd.casinoalap.domain.player.Player;
+import org.springframework.stereotype.Component;
+
 
 public class BetValidator {
 

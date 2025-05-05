@@ -2,14 +2,15 @@ package hu.szd.casinoalap.repository.impl;
 
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+@Component
 public class PlayerRepositoryImpl implements PlayerRepository {
 
-    private List<Player> PLAYERS = new ArrayList<>(List.of(
+    private final List<Player> PLAYERS = new ArrayList<>(List.of(
             new Player(1, "Dávid", 1000, 1000)
     ));
 
@@ -46,7 +47,6 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     public void deletePlayer(Player player) {
         try {
             PLAYERS.remove(player);
-            System.out.println("A játékos törölve.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
