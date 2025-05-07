@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Kaszinó - Kezdőlap</title>
 </head>
+<meta charset="UTF-8">
 <body>
+<h1>Üdvözlünk a Kaszinóban!</h1>
 
+<h2>Játszható játékok:</h2>
+<ul>
+    <li>Dupla, vagy semmi</li>
+
+</ul>
+
+<p>
+    <a th:href="@{players/login}">Bejelentkezés</a> |
+    <a th:href="@{players/register}">Regisztráció</a>
+</p>
 </body>
 </html>

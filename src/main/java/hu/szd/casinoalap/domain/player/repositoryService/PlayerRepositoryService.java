@@ -10,4 +10,5 @@ public interface PlayerRepositoryService {
     void updatePlayer(Player player);
     int newId();
     void deletePlayer(Player player);
+    Player findPlayerByUsername(String username);
 }

@@ -51,7 +51,9 @@ public class PlayerSelectionMenu implements Menu {
                 case 2 -> {
                     System.out.println("Add meg az új játékos nevét: ");
                     String newPlayerName = scanner.nextLine();
-                    Player newPlayer = new Player(playerRepositoryService.newId(), newPlayerName, 0, 0);
+                    System.out.println("Add meg az új játékos jelszavát: ");
+                    String newPlayerPassword = scanner.nextLine();
+                    Player newPlayer = new Player(playerRepositoryService.newId(), newPlayerName, 0, 0, newPlayerPassword);
                     playerRepositoryService.addPlayer(newPlayer);
                 }
 
