@@ -1,5 +1,6 @@
 package hu.szd.casinoalap.domain.player;
 
+
 public class Player {
 
     private final int id;

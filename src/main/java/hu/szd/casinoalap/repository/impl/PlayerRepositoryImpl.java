@@ -67,9 +67,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     @Override
     public Player findPlayerByUsername(String username) {
         for (Player player : PLAYERS) {
-            if (player.getUsername().equals(username)) {
-                return player;
-            }
+            if (player.getUsername().equals(username)) { return player; }
         }
         return null;
     }

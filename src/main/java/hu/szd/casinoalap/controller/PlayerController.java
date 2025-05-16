@@ -2,6 +2,7 @@ package hu.szd.casinoalap.controller;
 
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/players")
+@SessionAttributes("player")
 public class PlayerController {
     private final PlayerRepository playerRepository;
 
@@ -22,13 +24,6 @@ public class PlayerController {
         return "index";
     }
 
-
-//    @GetMapping("/login")
-//    public String getPlayers(Model model){
-//        List<Player> PLAYERS = playerRepository.getAllPlayers();
-//        model.addAttribute("players", PLAYERS);
-//        return "login";
-    //}
     @GetMapping("/login")
     public String showLoginForm() {
         return "players/login";
@@ -39,13 +34,15 @@ public class PlayerController {
         Player player = playerRepository.findPlayerByUsername(username);
         if (player != null && player.getPassword().equals(password)) {
             model.addAttribute("username", player.getUsername());
-            return "index";
+            model.addAttribute("currentChips", player.getCurrentChips());
+            model.addAttribute("totalGeneratedChips", player.getTotalGeneratedChips());
+            model.addAttribute("player", player);
+            return "players/profile";
         } else {
             return "players/login?error";
         }
     }
 
-    //create player HTML page
     @GetMapping("/register")
     public String showRegisterForm() {
         return "players/register";
@@ -61,13 +58,27 @@ public class PlayerController {
         return "players/login";
     }
 
+    @GetMapping("/profile")
+    public String showHome(@SessionAttribute("player") Player player,
+                           Model model) {
+        model.addAttribute("username", player.getUsername());
+        model.addAttribute("currentChips", player.getCurrentChips());
+        model.addAttribute("totalGeneratedChips", player.getTotalGeneratedChips());
+        return "players/profile";
+    }
 
-//    @GetMapping("/delete/{id}")
-//    public String deletePlayer(Model model, @PathVariable int id){
-//        Player player = playerRepository.findPlayerById(id);
-//        playerRepository.deletePlayer(player);
-//        List<Player> PLAYERS = playerRepository.getAllPlayers();
-//        model.addAttribute("players", PLAYERS);
-//        return "players/list";
-//    }
+    @GetMapping("/generate-chips")
+    public String showGenerateChipsForm(@SessionAttribute("player") Player player, Model model) {
+        model.addAttribute("username", player.getUsername());
+        return "players/chipGenerator";
+    }
+
+    @PostMapping("/generate-chips")
+    public String generateChips(@SessionAttribute("player") Player player,
+                                @RequestParam int amount) {
+        player.setCurrentChips(player.getCurrentChips() + amount);
+        player.setTotalGeneratedChips(player.getTotalGeneratedChips() + amount);
+        //egy mentést bele lehetne rakni: updatePlayer();
+        return "players/profile";
+    }
 }

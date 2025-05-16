@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zseton generálás</title>
+    <style>
+        .container {
+          max-width: 300px;
+          margin: auto;
+          text-align: center;
+        }
+        input[type="number"],
+        .full-width-button {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 8px;
+          margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Zseton generálása</h2>
+
+    <form th:action="@{/players/generate-chips}" method="post">
+        <label>Zseton mennyiség:</label><br/>
+        <input type="number" name="amount" min="1"/><br/>
+        <button type="submit" class="full-width-button">Generálás</button>
+    </form>
+
+    <form th:action="@{/players/profile}" method="get" style="margin-top:16px;">
+        <input type="hidden" name="username" th:value="${username}"/>
+        <button type="submit" class="full-width-button">Vissza a játékos oldalra</button>
+    </form>
+</div>
+</body>
+</html>

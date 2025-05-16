@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dupla vagy semmi</title>
+    <style>
+        .container {
+          max-width: 300px;
+          margin: auto;
+          text-align: center;
+        }
+        p, label {
+          text-align: left;
+          display: block;
+          margin-top: 12px;
+        }
+        input[type="number"],
+        .full-width-button {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 8px;
+          margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Dupla vagy semmi</h2>
+    <p><strong>Jelenlegi zseton:</strong> <span th:text="${player.currentChips}">0</span></p>
+
+    <p th:if="${error}" class="error">
+        Érvénytelen tét! A tétnek legalább
+        <span th:text="${minBet}">1</span>
+        és legfeljebb
+        <span th:text="${player.currentChips}">0</span>
+        között kell lennie.
+    </p>
+
+    <form th:action="@{/games/Double-or-Nothing}" method="post">
+        <label>Tét:</label>
+        <input type="number" name="bet" min="1" th:attr="max=${player.currentChips}"/>
+        <button type="submit" class="full-width-button">Játszom</button>
+    </form>
+
+    <p th:if="${delta != null}" class="result">
+      <span th:if="${delta > 0}">
+        Nyertél
+        <span th:text="${delta}">0</span>
+        zsetont!
+      </span>
+        <span th:if="${delta < 0}">
+        Vesztettél
+        <span th:text="${-delta}">0</span>
+        zsetont!
+      </span>
+    </p>
+
+    <form th:action="@{/players/profile}" method="get" style="margin-top:16px;">
+        <button type="submit" class="full-width-button">Vissza</button>
+    </form>
+</div>
+</body>
+</html>
