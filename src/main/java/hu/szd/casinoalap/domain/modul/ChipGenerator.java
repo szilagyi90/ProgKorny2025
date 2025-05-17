@@ -1,4 +1,4 @@
-package hu.szd.casinoalap.domain.service;
+package hu.szd.casinoalap.domain.modul;
 
 import hu.szd.casinoalap.domain.player.Player;
 

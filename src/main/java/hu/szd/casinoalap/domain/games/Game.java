@@ -1,6 +1,7 @@
 package hu.szd.casinoalap.domain.games;
 
 public interface Game {
-    void play();
+    double play();
     int minimumBet();
+    String name();
 }

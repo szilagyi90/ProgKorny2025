@@ -1,8 +1,8 @@
-package hu.szd.casinoalap.domain.player.repositoryService;
+package hu.szd.casinoalap.services;
 
 import hu.szd.casinoalap.domain.player.Player;
 
-public interface PlayerRepositoryService {
+public interface PlayerService {
 
     void addPlayer(Player player);
     void listPlayers();
@@ -10,4 +10,5 @@ public interface PlayerRepositoryService {
     void updatePlayer(Player player);
     int newId();
     void deletePlayer(Player player);
+    Player findPlayerByUsername(String username);
 }

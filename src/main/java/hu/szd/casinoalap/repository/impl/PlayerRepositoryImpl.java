@@ -11,7 +11,8 @@ import java.util.List;
 public class PlayerRepositoryImpl implements PlayerRepository {
 
     private final List<Player> PLAYERS = new ArrayList<>(List.of(
-            new Player(1, "Dávid", 1000, 1000)
+            new Player(1, "user1", 1000, 1000, "admin"),
+            new Player(2, "user2", 2000, 2000, "admin")
     ));
 
     @Override
@@ -62,5 +63,13 @@ public class PlayerRepositoryImpl implements PlayerRepository {
         }
         return newId;
     }
+
+    @Override
+    public Player findPlayerByUsername(String username) {
+        for (Player player : PLAYERS) {
+            if (player.getUsername().equals(username)) { return player; }
+        }
+        return null;
     }
+}
 

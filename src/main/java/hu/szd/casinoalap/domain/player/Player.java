@@ -1,17 +1,20 @@
 package hu.szd.casinoalap.domain.player;
 
+
 public class Player {
 
     private final int id;
     private final String username;
     private int currentChips;
     private int totalGeneratedChips;
+    private final String password;
 
-    public Player(int id, String username, int chips, int totalGeneratedChips) {
+    public Player(int id, String username, int chips, int totalGeneratedChips, String password) {
         this.id = id;
         this.username = username;
         this.currentChips = chips;
         this.totalGeneratedChips = totalGeneratedChips;
+        this.password = password;
     }
 
     public int getId() {
@@ -36,6 +39,9 @@ public class Player {
 
     public void setTotalGeneratedChips(int totalGeneratedChips) { this.totalGeneratedChips = totalGeneratedChips; }
 
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public String toString() {

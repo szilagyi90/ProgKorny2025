@@ -1,17 +1,17 @@
-package hu.szd.casinoalap.domain.player.repositoryService.imp;
+package hu.szd.casinoalap.services.imp;
 
-import hu.szd.casinoalap.domain.player.repositoryService.PlayerRepositoryService;
+import hu.szd.casinoalap.services.PlayerService;
 import hu.szd.casinoalap.domain.player.Player;
 import hu.szd.casinoalap.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class PlayerRepositoryServiceImpl implements PlayerRepositoryService {
+public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
 
-    public PlayerRepositoryServiceImpl(PlayerRepository playerRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
 
@@ -47,6 +47,11 @@ public class PlayerRepositoryServiceImpl implements PlayerRepositoryService {
 
     @Override
     public void deletePlayer(Player player) { playerRepository.deletePlayer(player); }
+
+    @Override
+    public Player findPlayerByUsername(String username) {
+        return playerRepository.findPlayerByUsername(username);
+    }
 
 
 }

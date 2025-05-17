@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Kaszinó – Kezdőlap</title>
+    <style>
+        .container {
+          max-width: 300px;
+          margin: auto;
+          text-align: center;
+        }
+        ul.game-list {
+          list-style: none;
+          padding: 0;
+          text-align: center;
+    }
+        .full-width-button {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 8px;
+          margin-top: 8px;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h1>Üdvözlünk a Kaszinóban!</h1>
 
+    <h2>Játszható játékok:</h2>
+    <ul class="game-list">
+        <li>Dupla vagy semmi</li>
+    </ul>
+
+    <form th:action="@{/players/login}" method="get">
+        <button type="submit" class="full-width-button">Bejelentkezés</button>
+    </form>
+
+    <form th:action="@{/players/register}" method="get">
+        <button type="submit" class="full-width-button">Regisztráció</button>
+    </form>
+</div>
 </body>
 </html>

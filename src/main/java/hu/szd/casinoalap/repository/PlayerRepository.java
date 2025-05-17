@@ -17,4 +17,6 @@ public interface PlayerRepository {
     void deletePlayer(Player player);
 
     int nextId();
+
+    Player findPlayerByUsername(String username);
 }
