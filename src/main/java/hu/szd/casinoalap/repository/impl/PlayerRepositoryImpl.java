@@ -10,33 +10,36 @@ import java.util.List;
 @Component
 public class PlayerRepositoryImpl implements PlayerRepository {
 
-    private final List<Player> PLAYERS = new ArrayList<>(List.of(
-            new Player(1, "user1", 1000, 1000, "admin"),
-            new Player(2, "user2", 2000, 2000, "admin")
-    ));
+    private final List<Player> players;
+
+    public PlayerRepositoryImpl() {
+        players = new ArrayList<>();
+        players.add(new Player(1, "user1", 1000, 1000, "asd"));
+        players.add(new Player(2, "user2", 2000, 2000, "asd"));
+    }
 
     @Override
     public List<Player> getAllPlayers() {
-        return PLAYERS;
+        return players;
     }
 
     @Override
     public void updatePlayer(Player updatedP) {
-        for (int i = 0; i < PLAYERS.size(); i++) {
-            if (PLAYERS.get(i).getId() == updatedP.getId()) {
-                PLAYERS.set(i, updatedP);
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getId() == updatedP.getId()) {
+                players.set(i, updatedP);
             }
         }
     }
 
     @Override
     public void addPlayer(Player player) {
-        PLAYERS.add(player);
+        players.add(player);
     }
 
     @Override
     public Player findPlayerById(int id) {
-        for (Player player : PLAYERS) {
+        for (Player player : players) {
             if (player.getId() == id) {
                 return player;
             }
@@ -47,7 +50,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     @Override
     public void deletePlayer(Player player) {
         try {
-            PLAYERS.remove(player);
+            players.remove(player);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -55,8 +58,8 @@ public class PlayerRepositoryImpl implements PlayerRepository {
 
     @Override
     public int nextId() {
-        int newId = PLAYERS.size() + 1;
-        for (Player player : PLAYERS){
+        int newId = players.size() + 1;
+        for (Player player : players){
             if (newId == player.getId()){
                 newId++;
             }
@@ -66,7 +69,7 @@ public class PlayerRepositoryImpl implements PlayerRepository {
 
     @Override
     public Player findPlayerByUsername(String username) {
-        for (Player player : PLAYERS) {
+        for (Player player : players) {
             if (player.getUsername().equals(username)) { return player; }
         }
         return null;
