@@ -50,6 +50,13 @@
     <form th:action="@{/players/login}" method="get" style="margin-top:16px;">
         <button type="submit" class="full-width-button">Kijelentkezés</button>
     </form>
+
+    <form th:action="@{/players/delete-player}" method="get" style="margin-top:16px;">
+        <button type="submit" class="full-width-button"
+                style="background-color: #e53e3e; color: white;">
+            Játékos törlése
+        </button>
+    </form>
 </div>
 </body>
 </html>
