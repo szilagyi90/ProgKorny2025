@@ -38,7 +38,7 @@
 
     <form th:action="@{/games/Double-or-Nothing}" method="post">
         <label>Tét:</label>
-        <input type="number" name="bet" min="1" th:attr="max=${player.currentChips}"/>
+        <input type="number" name="bet"/>
         <button type="submit" class="full-width-button">Játszom</button>
     </form>
 
