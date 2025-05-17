@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
 
@@ -79,7 +80,15 @@ public class PlayerController {
                                 @RequestParam int amount) {
         player.setCurrentChips(player.getCurrentChips() + amount);
         player.setTotalGeneratedChips(player.getTotalGeneratedChips() + amount);
-        //egy mentést bele lehetne rakni: updatePlayer();
+        playerService.updatePlayer(player);
         return "players/profile";
+    }
+
+    @GetMapping("/delete-player")
+    public String deletePlayer(@SessionAttribute("player") Player player,
+                               SessionStatus status) {
+        playerService.deletePlayer(player);
+        status.setComplete();
+        return "players/login";
     }
 }
