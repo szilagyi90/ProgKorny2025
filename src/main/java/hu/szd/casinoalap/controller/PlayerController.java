@@ -51,7 +51,7 @@ public class PlayerController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password, Model model) {
+    public String register(@RequestParam String username, @RequestParam String password) {
         if (playerService.findPlayerByUsername(username) != null) {
             return "players/register?error";
         }
