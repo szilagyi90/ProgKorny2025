@@ -1,9 +1,17 @@
 package hu.szd.casinoalap.domain.player;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Player {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int id;
+
     private final String username;
     private int currentChips;
     private int totalGeneratedChips;
