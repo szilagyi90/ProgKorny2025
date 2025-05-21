@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Játékosok kezelése</title>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .full-width-button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin-top: 16px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Üdvözöllek, <span th:text="${user.username}">User</span>!</h2>
+
+  <div th:if="${#lists.isEmpty(players)}">
+    <p>Még nem rendelkezel egyetlen játékossal sem.</p>
+  </div>
+  <div th:if="${players != null and !#lists.isEmpty(players)}">
+    <h3>Játékosaid:</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Játékos név</th>
+      <th>Jelenlegi zseton</th>
+      <th>Összesen generált zseton</th>
+      <th>Művelet</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${players}">
+      <td th:text="${p.playerName}">player1</td>
+      <td th:text="${p.currentChips}">100</td>
+      <td th:text="${p.totalGeneratedChips}">200</td>
+      <td>
+        <form th:action="@{/players/select}" method="post">
+          <input type="hidden" name="playerId" th:value="${p.id}"/>
+          <button type="submit" class="action-button">Játékos választása</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <form th:action="@{/players/register}" method="get">
+    <button type="submit" class="full-width-button">Új játékos létrehozása</button>
+  </form>
+</div>
+</body>
+</html>

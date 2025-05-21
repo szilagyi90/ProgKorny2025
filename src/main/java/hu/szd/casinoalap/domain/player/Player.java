@@ -1,36 +1,53 @@
 package hu.szd.casinoalap.domain.player;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "players")
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int id;
+    private int id;
 
-    private final String username;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String playerName;
+    @Column(name="Current_chips")
     private int currentChips;
+    @Column(name="Total_generated_chips")
     private int totalGeneratedChips;
-    private final String password;
 
-    public Player(int id, String username, int chips, int totalGeneratedChips, String password) {
-        this.id = id;
-        this.username = username;
+    public Player(){
+
+    }
+
+    public Player(String playerName, int chips, int totalGeneratedChips, User user) {
+        this.playerName = playerName;
         this.currentChips = chips;
         this.totalGeneratedChips = totalGeneratedChips;
-        this.password = password;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPlayerName() {
+        return playerName;
     }
 
     public int getCurrentChips() {
@@ -45,17 +62,7 @@ public class Player {
         return totalGeneratedChips;
     }
 
-    public void setTotalGeneratedChips(int totalGeneratedChips) { this.totalGeneratedChips = totalGeneratedChips; }
+    public void setTotalGeneratedChips(int totalGeneratedChips) {
+        this.totalGeneratedChips = totalGeneratedChips; }
 
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String toString() {
-        return  "id= " + id +
-                ", username= " + username +
-                ", jelenlegi zseton mennyiség= " + currentChips +
-                ", összesen vásárolt zseton= " + totalGeneratedChips;
-    }
 }

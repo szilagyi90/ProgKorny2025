@@ -20,15 +20,16 @@
 </head>
 <body>
 <h2 style="text-align:center;">Bejelentkezés</h2>
-<form th:action="@{/players/login}" method="post">
+
+<form th:action="@{/users/login}" th:object="${user}" method="post">
   <label>Felhasználónév: </label><br/>
-  <input type="text" name="username"/><br/>
+  <input type="text" th:field="*{username}"/><br/>
   <label>Jelszó: </label><br/>
-  <input type="password" name="password"/><br/>
+  <input type="password" th:field="*{password}"/><br/>
   <button type="submit" class="full-width-button">Bejelentkezés</button>
 </form>
 
-<form th:action="@{/players/register}" method="get" style="max-width:300px; margin: 16px auto 0;">
+<form th:action="@{/users/register}" method="get" style="max-width:300px; margin: 16px auto 0;">
   <button type="submit" class="full-width-button">Regisztráció</button>
 </form>
 </body>
