@@ -62,7 +62,6 @@ public class Player {
         return totalGeneratedChips;
     }
 
-    public void setTotalGeneratedChips(int totalGeneratedChips) {
-        this.totalGeneratedChips = totalGeneratedChips; }
+    public void setTotalGeneratedChips(int totalGeneratedChips) { this.totalGeneratedChips = totalGeneratedChips; }
 
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Játékos létrehozása</title>
+    <style>
+        form {
+            max-width: 300px;
+            margin: auto;
+        }
+        input[type="text"],
+        .full-width-button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px;
+            margin-top: 8px;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2 class="text-center">Új játékos létrehozása</h2>
+
+<form th:action="@{/players/create}" th:object="${player}" method="post">
+    <label>Játékos név:</label><br/>
+    <input type="text" th:field="*{playerName}" placeholder="Add meg a játékos nevét"/><br/>
+
+    <label>Kezdő zseton:</label><br/>
+    <input type="text" th:field="*{currentChips}" placeholder="Pl. 1000"/><br/>
+
+    <button type="submit" class="full-width-button">Létrehozás</button>
+</form>
+
+<form th:action="@{/users/profile}" method="get" style="max-width: 300px; margin: 16px auto 0;">
+    <button type="submit" class="full-width-button">Vissza a profilhoz</button>
+</form>
+</body>
+</html>

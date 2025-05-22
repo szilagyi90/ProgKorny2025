@@ -38,7 +38,7 @@
   <div th:if="${#lists.isEmpty(players)}">
     <p>Még nem rendelkezel egyetlen játékossal sem.</p>
   </div>
-  <div th:if="${players != null and !#lists.isEmpty(players)}">
+  <div th:if="${!#lists.isEmpty(players)}">
     <h3>Játékosaid:</h3>
   <table>
     <thead>
@@ -55,7 +55,7 @@
       <td th:text="${p.currentChips}">100</td>
       <td th:text="${p.totalGeneratedChips}">200</td>
       <td>
-        <form th:action="@{/players/select}" method="post">
+        <form th:action="@{/players/playermenu}" method="post">
           <input type="hidden" name="playerId" th:value="${p.id}"/>
           <button type="submit" class="action-button">Játékos választása</button>
         </form>
@@ -65,7 +65,7 @@
   </table>
   </div>
 
-  <form th:action="@{/players/register}" method="get">
+  <form th:action="@{/players/create}" method="get">
     <button type="submit" class="full-width-button">Új játékos létrehozása</button>
   </form>
 </div>

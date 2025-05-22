@@ -17,7 +17,7 @@ public class PlayerJpaService {
     public List<Player> getPlayersByUser(User user) {
         return playerRepo.findByUser(user);
     }
-
+    public Player getPlayerById(int id){ return playerRepo.findPlayerById(id);}
     public void addPlayer(Player player) {
         playerRepo.save(player);
     }

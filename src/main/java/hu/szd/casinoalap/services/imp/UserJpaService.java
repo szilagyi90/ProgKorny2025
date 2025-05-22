@@ -14,7 +14,7 @@ public class UserJpaService {
     public User getByUsername(String username) {
         return userRepo.findByUsername(username);
     }
-    public void save(User user) {
-        userRepo.save(user);
+    public User save(User user) {
+        return userRepo.save(user);
     }
 }

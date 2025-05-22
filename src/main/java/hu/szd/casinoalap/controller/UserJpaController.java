@@ -30,7 +30,8 @@ public class UserJpaController {
     public String login(@ModelAttribute User user, HttpSession session) {
         User existingUser = userJpaService.getByUsername(user.getUsername());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            session.setAttribute("loggedUser", user);
+            session.setAttribute("loggedUser", existingUser);
+            System.out.println("User ID = " + user.getId());
             return "users/profile";
         } else {
             return "users/login?error";
@@ -43,7 +44,9 @@ public class UserJpaController {
     }
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
-        userJpaService.save(user);
+        System.out.println("User ID = " + user.getId());
+        User savedUser = userJpaService.save(user);
+        System.out.println("User ID = " + user.getId());
         return "redirect:/users/login";
     }
     @GetMapping("/profile")

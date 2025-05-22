@@ -42,7 +42,7 @@ public class User {
         return password;
     }
 
-    public int getUserId() {
+    public int getId() {
         return id;
     }
 

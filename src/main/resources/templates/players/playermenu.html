@@ -29,11 +29,11 @@
 </head>
 <body>
 <div class="container">
-    <h2 th:text="'Üdvözlünk, ' + ${username} + '!'"></h2>
+    <h2 th:text="'Üdvözlünk, ' + ${player.playerName} + '!'"></h2>
 
     <h3>Játékos adatok:</h3>
     <ul class="info-list">
-        <li><span>Felhasználónév:</span><span th:text="${player.username}"></span></li>
+        <li><span>Felhasználónév:</span><span th:text="${player.playerName}"></span></li>
         <li><span>Jelenlegi zseton:</span><span th:text="${player.currentChips}"></span></li>
         <li><span>Összesen generált zseton:</span><span th:text="${player.totalGeneratedChips}"></span></li>
     </ul>
@@ -47,8 +47,8 @@
         <button type="submit" class="full-width-button">Dupla vagy semmi</button>
     </form>
 
-    <form th:action="@{/players/login}" method="get" style="margin-top:16px;">
-        <button type="submit" class="full-width-button">Kijelentkezés</button>
+    <form th:action="@{/players/playermenu}" method="get" style="margin-top:16px;">
+        <button type="submit" class="full-width-button">Vissza</button>
     </form>
 
     <form th:action="@{/players/delete-player}" method="get" style="margin-top:16px;">
