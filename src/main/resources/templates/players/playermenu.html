@@ -47,11 +47,11 @@
         <button type="submit" class="full-width-button">Dupla vagy semmi</button>
     </form>
 
-    <form th:action="@{/players/playermenu}" method="get" style="margin-top:16px;">
+    <form th:action="@{/users/profile}" method="get" style="margin-top:16px;">
         <button type="submit" class="full-width-button">Vissza</button>
     </form>
 
-    <form th:action="@{/players/delete-player}" method="get" style="margin-top:16px;">
+    <form th:action="@{/players/delete-player}" method="post" style="margin-top:16px;">
         <button type="submit" class="full-width-button"
                 style="background-color: #e53e3e; color: white;">
             Játékos törlése

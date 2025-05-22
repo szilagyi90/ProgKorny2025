@@ -26,6 +26,7 @@
 <body>
 <div class="container">
     <h2>Dupla vagy semmi</h2>
+    <p><strong>Játékos:</strong> <span th:text="${player.playerName}">Player</span></p>
     <p><strong>Jelenlegi zseton:</strong> <span th:text="${player.currentChips}">0</span></p>
 
     <p th:if="${error}" class="error">
@@ -38,24 +39,16 @@
 
     <form th:action="@{/games/Double-or-Nothing}" method="post">
         <label>Tét:</label>
-        <input type="number" name="bet"/>
+        <input type="number" name="bet" min="${minBet}"/>
         <button type="submit" class="full-width-button">Játszom</button>
     </form>
 
     <p th:if="${delta != null}" class="result">
-      <span th:if="${delta > 0}">
-        Nyertél
-        <span th:text="${delta}">0</span>
-        zsetont!
-      </span>
-        <span th:if="${delta < 0}">
-        Vesztettél
-        <span th:text="${-delta}">0</span>
-        zsetont!
-      </span>
+        <span th:if="${delta > 0}">Nyertél <span th:text="${delta}">0</span> zsetont!</span>
+        <span th:if="${delta < 0}">Vesztettél <span th:text="${-delta}">0</span> zsetont!</span>
     </p>
 
-    <form th:action="@{/players/profile}" method="get" style="margin-top:16px;">
+    <form th:action="@{/players/playermenu}" method="get" style="margin-top:16px;">
         <button type="submit" class="full-width-button">Vissza</button>
     </form>
 </div>

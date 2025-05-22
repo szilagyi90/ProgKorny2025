@@ -68,6 +68,13 @@
   <form th:action="@{/players/create}" method="get">
     <button type="submit" class="full-width-button">Új játékos létrehozása</button>
   </form>
+
+  <form th:action="@{/users/logout}" method="post">
+    <button type="submit" class="full-width-button"
+            style="margin-top:16px; background-color:#e53e3e; color:white;">
+      Kijelentkezés
+    </button>
+  </form>
 </div>
 </body>
 </html>

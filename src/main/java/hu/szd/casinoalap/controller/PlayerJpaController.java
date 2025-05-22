@@ -52,7 +52,6 @@ public class PlayerJpaController {
     @PostMapping("/create")
     public String createPlayer(@ModelAttribute("player") Player player, HttpSession session) {
         User user = (User) session.getAttribute("loggedUser");
-        System.out.println("User ID = " + user.getId());
 
         player.setUser(user);
         player.setTotalGeneratedChips(player.getCurrentChips());
@@ -76,16 +75,13 @@ public class PlayerJpaController {
     @PostMapping("/generate-chips")
     public String generateChips(@RequestParam("amount") int amount, HttpSession session) {
         Player player = (Player) session.getAttribute("selectedPlayer");
-
-        player.setCurrentChips(player.getCurrentChips() + amount);
-        player.setTotalGeneratedChips(player.getTotalGeneratedChips() + amount);
-
+        playerJpaService.generateChips(player, amount);
         playerJpaService.addPlayer(player);
         session.setAttribute("selectedPlayer", player);
 
         return "redirect:/players/playermenu";
     }
-    @PostMapping("/delete")
+    @PostMapping("/delete-player")
     public String deletePlayer(HttpSession session) {
         Player player = (Player) session.getAttribute("selectedPlayer");
 

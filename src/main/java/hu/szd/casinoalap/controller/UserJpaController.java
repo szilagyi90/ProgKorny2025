@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
 
@@ -27,12 +28,12 @@ public class UserJpaController {
         return "users/login";
     }
     @PostMapping("/login")
-    public String login(@ModelAttribute User user, HttpSession session) {
-        User existingUser = userJpaService.getByUsername(user.getUsername());
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+    public String login(@ModelAttribute User userForm, HttpSession session) {
+        User existingUser = userJpaService.getByUsername(userForm.getUsername());
+        if (existingUser != null && existingUser.getPassword().equals(userForm.getPassword())) {
             session.setAttribute("loggedUser", existingUser);
-            System.out.println("User ID = " + user.getId());
-            return "users/profile";
+            System.out.println("User ID = " + existingUser.getId());
+            return "redirect:/users/profile";
         } else {
             return "users/login?error";
         }
@@ -45,7 +46,7 @@ public class UserJpaController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
         System.out.println("User ID = " + user.getId());
-        User savedUser = userJpaService.save(user);
+        userJpaService.save(user);
         System.out.println("User ID = " + user.getId());
         return "redirect:/users/login";
     }
@@ -57,9 +58,12 @@ public class UserJpaController {
 
         model.addAttribute("user", user);
         model.addAttribute("players", players);
-
+        System.out.println("User ID = " + user.getId());
         return "users/profile";
     }
-
-
+    @PostMapping("/logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
+        return "redirect:/users/login";
+    }
 }
