@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-test:
-    tuns-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code (Clone the repo to this runner)
         uses: actions/checkout@v3
