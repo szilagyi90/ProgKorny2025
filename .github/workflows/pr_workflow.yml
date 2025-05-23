@@ -12,14 +12,14 @@ jobs:
       - name: Checkout code (Clone the repo to this runner)
         uses: actions/checkout@v3
 
-      - name: Install jave
+      - name: Install java
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '23'
           distribution: "temurin"
 
       - name: Build
-        run: mvn build
+        run: mvn compile
 
       - name: Test
         run: mvn test
